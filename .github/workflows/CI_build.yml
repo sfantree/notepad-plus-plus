@@ -5,10 +5,11 @@ on: [workflow_dispatch]
 jobs:
   build_windows:
     runs-on: windows-latest
-    if: needs.before_build.outputs.result == '' || needs.before_build.outputs.result == 'ONEJOB'
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.before_build.outputs.matrix) }}
+      matrix:
+        build_configuration: [Debug]
+        build_platform: [Win32]
 
     steps:
     - name: Checkout repo
